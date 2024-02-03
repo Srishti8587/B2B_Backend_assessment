@@ -1,5 +1,5 @@
 const validateCreateProduct = (req,res,next) =>{
-    if(!req.product_name || !req.price)
+    if(!req.body.product_name || !req.body.price)
     {
         return res.status(400).json({
             data:{},

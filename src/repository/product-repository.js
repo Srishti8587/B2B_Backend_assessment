@@ -2,13 +2,26 @@ const ProductModel = require('../models/Product');
 const VariantModel = require('../models/Variant');
 
 class ProductRepository {
-    async createproduct ({ product_name, description,price})
+    async createproduct ({ product_name, description,price,variants})
     { 
         try{
-             console.log(product_name, description,price);
              const product = new ProductModel({product_name, description,price});
-             await product.save();
-             return product;
+
+             if(variants)
+             {
+                 const createdVariants = await VariantModel.create(
+                    variants.map(variant => ({
+                        variant_name: variant.variant_name,
+                        sku: variant.sku,
+                        additional_cost: variant.additional_cost,
+                        stock_count: variant.stock_count,
+                        product_id: product._id,
+                    }))
+                );
+                product.variants = createdVariants.map(variant => variant._id);
+             }
+            await product.save();
+            return product;
         }
         catch(error)
         {
