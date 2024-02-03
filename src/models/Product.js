@@ -12,7 +12,11 @@ const mongoose =require('mongoose');
     price: {
       type: Number,
       required:true
-    }
+    },
+    variants:[{
+      type : mongoose.Types.ObjectId,
+      ref:"Variant",
+  }],
   }, {
     timestamps: {
       createdAt: 'created_at',

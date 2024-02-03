@@ -70,7 +70,7 @@ const deleteProduct = async (req,res) =>{
   }
   catch(error)
   {
-    console.log("Error in controllers while delete all product");
+    console.log("Error in controllers while delete product");
     return res.status(404).json({
       success: false,
       message: "Not able to delete product",

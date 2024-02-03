@@ -1,4 +1,5 @@
 const ProductModel = require('../models/Product');
+const VariantModel = require('../models/Variant');
 
 class ProductRepository {
     async createproduct ({ product_name, description,price})
@@ -52,7 +53,7 @@ class ProductRepository {
         }
         catch(error)
         {
-            console.log("Error in deleting the product in rerepositorypo layer");
+            console.log("Error in deleting the product in repository layer");
             throw({error});
         }
     }
