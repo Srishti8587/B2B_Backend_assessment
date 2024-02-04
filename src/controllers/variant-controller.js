@@ -1,11 +1,12 @@
 const VariantService = require('../services/variant-service');
+const { ClientErrorCodes , ServerErrorCodes, SuccessCodes } = require('../utils/error-code');
 
 const variantservice = new VariantService();
 
 const createVariant = async (req,res)=>{
     try{
             const variant = await variantservice.createVariant(req.body);
-            return  res.status(201).json({
+            return  res.status(SuccessCodes.CREATED).json({
                 data:variant,
                 success:true,
                 message:"Successfully created variant"
@@ -14,7 +15,7 @@ const createVariant = async (req,res)=>{
     catch(error)
     {
         console.log("Error in controllers while creating variant");
-        return res.status(404).json({
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
           data: {},
           success: false,
           message: "Not able to create variant",
@@ -26,7 +27,7 @@ const createVariant = async (req,res)=>{
 const getAllVariant = async (req,res) =>{
     try{
          const variants = await variantservice.getAllVariant();
-         return  res.status(201).json({
+         return  res.status(SuccessCodes.OK).json({
             data:variants,
             success:true,
             message:"Successfully got all variant"
@@ -35,7 +36,7 @@ const getAllVariant = async (req,res) =>{
     catch(error)
     {
         console.log("Error in getting all variant");
-        return res.status(404).json({
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
             data: {},
             success: false,
             message: "Not able to get variant",
@@ -49,14 +50,14 @@ const getVariantById = async (req,res) =>{
             const variants = await variantservice.getVariantById(req.params.id);
             if(!variants)
             {
-                return res.status(500).json({
+                return res.status(ClientErrorCodes.NOT_FOUND).json({
                     data:variants,
                     success:false,
                     message:"No such variant exists"
                 });
             }
             
-            return  res.status(201).json({
+            return  res.status(SuccessCodes.OK).json({
             data:variants,
             success:true,
             message:"Successfully got variant by id"
@@ -65,7 +66,7 @@ const getVariantById = async (req,res) =>{
     catch(error)
     {
         console.log("Error in getting variant by id");
-        return res.status(404).json({
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
             data: {},
             success: false,
             message: "Not able to get variant",
@@ -77,7 +78,7 @@ const getVariantById = async (req,res) =>{
 const updateVariant = async (req,res) =>{
     try{
           const new_variant = await variantservice.updateVariant(req.params.id,req.body);
-          return res.status(200).json({
+          return res.status(SuccessCodes.OK).json({
             data:new_variant,
             success:true,
             message:"Successfully updated variant"
@@ -86,7 +87,7 @@ const updateVariant = async (req,res) =>{
     catch(error)
     {
         console.log("Error in updating variant");
-        return res.status(404).json({
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
             data: {},
             success: false,
             message: "Not able to update variant",
@@ -98,7 +99,7 @@ const updateVariant = async (req,res) =>{
 const deleteVariant = async (req,res) =>{
     try{
          const result = await variantservice.deleteVariant(req.params.id);
-         return res.status(201).json({
+         return res.status(SuccessCodes.OK).json({
           success: true,
           message: "Successfully deleted variant",
         });
@@ -106,7 +107,7 @@ const deleteVariant = async (req,res) =>{
     catch(error)
     {
       console.log("Error in controllers while delete variant");
-      return res.status(404).json({
+      return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
         success: false,
         message: "Not able to delete variant",
         err: error,

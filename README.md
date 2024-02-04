@@ -8,6 +8,9 @@ This API provides endpoints for managing products and their variants. It allows 
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Environment Variables](#environment-variables)
+- [DB Structure](#db-structure) 
+- [Models](#models)
+- [Project Structure](#project-structure)   
 - [Endpoints](#endpoints)
 - [Testing](#testing)
 - [Contributing](#contributing)
@@ -37,6 +40,51 @@ npm install
 PORT: 3000
 MONGO_URL: <your_mongo_url>
 ```
+
+
+## DB STRUCTURE
+
+```
++-----------------+        +------------------+
+|    Product      |        |      Variant     |
++-----------------+        +------------------+
+| _id        (PK) |        | _id    (PK)      |
+| product_name    |        | variant_name     |
+| description     |        | sku   (unique)   |
+| price           |        | additional_cost  |
++-----------------+        | stock_count      |
+                           | product_id (FK)  |
+                           +------------------+
+
+
+```
+
+## Models
+
+### Product
+- `id`: Primary key for the Product table.
+- `product_name`: Name of the product (unique).
+- `description`: Description of the product.
+- `price`: Price of the product.
+
+### Variant
+- `id`: Primary key for the Variant table.
+- `variant_name`: Name of the variant.
+- `sku`: Stock Keeping Unit, a unique identifier for the variant.
+- `additional_cost`: Additional cost compared to the base product cost.
+- `stock_count`: Current stock count of the variant.
+- `product_id (FK)`: Foreign key referencing the id in the Product table, establishing a relationship between Product and Variant.
+
+
+
+## Project Structure
+
+- **models**: Database models for Product and Variant.
+- **repository**: Database interaction layer for CRUD operations.
+- **services**: Business logic layer, acting as an intermediary between controllers and repositories.
+- **controllers**: Handle HTTP requests and invoke services.
+- **routes**: Define API routes and connect them to controllers.
+- **middlewares**: Additional functions for handling specific tasks, such as validation.
 
 
 ## Endpoints
