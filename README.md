@@ -75,4 +75,14 @@ MONGO_URL: <your_mongo_url>
 - **Description:** Search Product by it's product_name, description or by variant_name.
 
 
+## Testing
+- Tests for the model to ensure data is being stored and retrieved correctly.
+- Tests for each endpoint to ensure they function as expected.
+- Tests to ensure the search functionality works as expected.
+
+## Contributing
+If you'd like to contribute, please follow these guidelines.
+
+
+
 
