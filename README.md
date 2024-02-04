@@ -8,6 +8,7 @@ This API provides endpoints for managing products and their variants. It allows 
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Environment Variables](#environment-variables)
+  - [Run the Server](#run-server)
 - [DB Structure](#db-structure) 
 - [Models](#models)
 - [Project Structure](#project-structure)   
@@ -39,6 +40,11 @@ npm install
 ```bash
 PORT: 3000
 MONGO_URL: <your_mongo_url>
+```
+
+### Run Server
+```
+npm start
 ```
 
 
