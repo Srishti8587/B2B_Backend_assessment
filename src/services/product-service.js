@@ -69,6 +69,19 @@ class ProductService {
          throw({error});
         }
     }
+
+    async searchProduct(query)
+    {
+        try{
+                const query_result = await this.productRepository.searchProduct(query);
+                return query_result;
+        }
+        catch(error)
+        {
+            console.log("Error in searching query in service layer");
+            throw({error});
+        }
+    }
 }
 
 module.exports = ProductService;

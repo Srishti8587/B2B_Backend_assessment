@@ -83,6 +83,37 @@ class ProductRepository {
             throw({error});
         }
     }
+
+
+    async searchProduct(query)
+    {
+        try{
+               
+                const searched_products = await ProductModel.find({
+                 $or:  [ {product_name:{$regex: query , $options:'i'},
+                    description : {$regex : query , $options:'i'}}]
+                });
+               
+
+                const variantIds = await VariantModel.find({
+                    variant_name:{$regex : query,$options:'i'}
+                });
+               
+                const productIds = searched_products.map(product => product.id);
+                
+                
+                const variantsProduct = await VariantModel.find({
+                     product_id :{$in :[productIds]}
+                });
+                const result = [...variantIds,...variantsProduct];
+                return result;
+        }
+        catch(error)
+        {
+            console.log("Error while searching in repository layer");
+            throw({error});
+        }
+    }
     
 }
 

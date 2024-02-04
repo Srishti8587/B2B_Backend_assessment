@@ -18,6 +18,7 @@ router.get("/all-products", ProductController.getAllProduct);
 router.patch("/update_product/:id", ProductController.updateProduct);
 router.delete("/delete_product/:id", ProductController.deleteProduct);
 router.get("/product/:id", ProductController.getProductById);
+router.get("/search",ProductController.searchProduct);
 
 router.post(
   "/variant",

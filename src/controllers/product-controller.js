@@ -59,17 +59,14 @@ const updateProduct = async (req, res) => {
   }
 };
 
-
-const deleteProduct = async (req,res) =>{
-  try{
-       const result = await productService.deleteProduct(req.params.id);
-       return res.status(201).json({
-        success: true,
-        message: "Successfully deleted product",
-      });
-  }
-  catch(error)
-  {
+const deleteProduct = async (req, res) => {
+  try {
+    const result = await productService.deleteProduct(req.params.id);
+    return res.status(201).json({
+      success: true,
+      message: "Successfully deleted product",
+    });
+  } catch (error) {
     console.log("Error in controllers while delete product");
     return res.status(404).json({
       success: false,
@@ -79,17 +76,15 @@ const deleteProduct = async (req,res) =>{
   }
 };
 
-const getProductById =async (req,res) =>{
-  try{
-       const product = await productService.getProductById(req.params.id);
-       return res.status(201).json({
-        data : product,
-        success: true,
-        message: "Successfully got the product",
-      });
-  }
-  catch(error)
-  {
+const getProductById = async (req, res) => {
+  try {
+    const product = await productService.getProductById(req.params.id);
+    return res.status(201).json({
+      data: product,
+      success: true,
+      message: "Successfully got the product",
+    });
+  } catch (error) {
     console.log("Error in controllers while getting product by id");
     return res.status(404).json({
       success: false,
@@ -97,6 +92,31 @@ const getProductById =async (req,res) =>{
       err: error,
     });
   }
-}
+};
 
-module.exports = { createProduct, getAllProduct,updateProduct, deleteProduct, getProductById };
+const searchProduct = async (req, res) => {
+  try {
+    const query_result = await productService.searchProduct(req.query.q);
+    return res.status(200).json({
+      data: query_result,
+      success: true,
+      message: "Successfully search the query",
+    });
+  } catch (error) {
+    console.log("Error in controllers while searching query");
+    return res.status(404).json({
+      success: false,
+      message: "Not able to search the query",
+      err: error,
+    });
+  }
+};
+
+module.exports = {
+  createProduct,
+  getAllProduct,
+  updateProduct,
+  deleteProduct,
+  getProductById,
+  searchProduct,
+};

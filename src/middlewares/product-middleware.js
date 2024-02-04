@@ -10,6 +10,6 @@ const validateCreateProduct = (req,res,next) =>{
     }
 
     next();
-}
+};
 
 module.exports = {validateCreateProduct};
