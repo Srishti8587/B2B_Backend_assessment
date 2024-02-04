@@ -10,9 +10,7 @@ This API provides endpoints for managing products and their variants. It allows 
   - [Environment Variables](#environment-variables)
 - [Endpoints](#endpoints)
 - [Testing](#testing)
-- [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
