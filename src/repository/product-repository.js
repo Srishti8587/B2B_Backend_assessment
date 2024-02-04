@@ -62,6 +62,7 @@ class ProductRepository {
     {
         try{
                const product = await ProductModel.findByIdAndDelete(id);
+               await VariantModel.deleteMany({ product_id: id });
                return true;
         }
         catch(error)
